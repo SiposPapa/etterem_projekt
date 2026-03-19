@@ -4,7 +4,10 @@ from csv_definialas import Etel, Asztal
 
 class EtteremRendszer:
     def __init__(self, asztalok_szama):
-        self.asztalok = [Asztal(i + 1) for i in range(asztalok_szama)]
+        self.asztalok = []
+        for i in range(asztalok_szama):
+            uj_asztal = Asztal(i + 1)
+        self.asztalok.append(uj_asztal)
         self.menu = {}
         self.raktar = {}
         self.betoltes()
@@ -18,7 +21,7 @@ class EtteremRendszer:
         with open('recept.csv', 'r', encoding='utf-8') as f:
             for sor in csv.reader(f, delimiter=';'):
                 if sor[0] not in receptek:
-                    receptek[sor[0]] = {}
+                    receptek[sor[0]] = {} #ha nem létezik a dictben, akkor létrehozza a kulcsot(a kulcs-érték párból)
                 receptek[sor[0]][sor[1]] = float(sor[2])
 
         with open('menu.csv', 'r', encoding='utf-8') as f:
