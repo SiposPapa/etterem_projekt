@@ -63,11 +63,11 @@ def main():
         print("4. Kilépés")
 
         # Menu választás
-        valasztas = input("Válasszon opciót: ").strip()
+        valasztas = input("Válasszon opciót: ")
+        valasztas.strip()
 
-        # ------------------------------
+
         # 1. Új rendelés felvétele
-        # ------------------------------
         if valasztas == "1":
             # Asztalszám bekérése
             asztal = beolvas_egesz_szam("Asztal száma: ")
@@ -90,9 +90,7 @@ def main():
             eredmeny = rendszer.rendeles_felvetel(asztal, etel)
             print(eredmeny)
 
-        # ------------------------------
         # 2. Fizetés / Asztal lezárása
-        # ------------------------------
         elif valasztas == "2":
             # Asztal száma
             asztal = beolvas_egesz_szam("Melyik asztal fizet? ")
