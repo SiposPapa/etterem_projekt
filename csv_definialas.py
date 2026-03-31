@@ -1,33 +1,47 @@
+# Egyszerű, fapados osztályok.
+# Etel: név, ár, recept (alapanyag -> mennyiség)
+# Asztal: rendelések listája, összegszámítás, lezárás.
+
 class Etel:
     def __init__(self, nev, ar, receptek):
+        # nev: string
+        # ar: int vagy float
+        # receptek: dict (kulcs: alapanyag neve, érték: mennyiség float)
         self.nev = nev
         self.ar = ar
-        self.receptek = receptek  #Dictionary: pl: "etel": "pizza", mert szebb, mint a lista, pl: "etel":"3"
+        self.receptek = receptek
+
 
 class Asztal:
     def __init__(self, szam):
-        self.szam = szam   #Itt tároljuk az Etel objektumokat
-        self.rendelesek = []    #Követi, hogy ki mit rendelt az adott asztalnál
-        self.nyitva = False
+        self.szam = szam
+        self.rendelesek = []   # Etel objektumok listája
+        self.nyitva = False    # lesz True, ha van rendelés
 
-    def hozzaad(self, etel): #Egy Etel objektumot ad, és az asztala True lesz
-            self.rendelesek.append(etel)
-            self.nyitva = True
- 
+    def hozzaad(self, etel):
+        # Etel objektumot ad hozzá a rendelésekhez.
+        self.rendelesek.append(etel)
+        self.nyitva = True
+
     def osszeg_szamitas(self):
-        # Összegzés tétele
+        # Összegzés tétele: végigmegyünk és összeadjuk az árakat.
         osszesen = 0
         for etel in self.rendelesek:
             osszesen += etel.ar
         return osszesen
+
     def lezaras(self):
-        #Összegszámítás, függvény meghívás
+        # Lezáráskor:
+        # - kiszámoljuk az összeget
+        # - kigyűjtjük a rendelt ételek neveit (klasszikus for ciklus)
+        # - visszaállítjuk az asztalt alaphelyzetbe
         osszeg = self.osszeg_szamitas()
-        # Listakészítés            
+
         nevek_listaja = []
         for etel in self.rendelesek:
             nevek_listaja.append(etel.nev)
-        #Adatok alaphelyzetbe állítása, asztal nyitása
+
         self.rendelesek = []
         self.nyitva = False
+
         return osszeg, nevek_listaja
