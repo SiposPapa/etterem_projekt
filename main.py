@@ -77,8 +77,7 @@ def main():
                 continue
 
             vevo = input("Vevő neve: ").strip()
-            felszolga = input("Felszolgáló neve: ").strip()
-            print(rendszer.fizetes(asztal, vevo, felszolga))
+            print(rendszer.fizetes(asztal, vevo))
 
         # 3) Raktárkészlet
         elif valasztas == "3":
@@ -86,7 +85,7 @@ def main():
                 print("A raktár üres vagy nincs feltöltve.")
             else:
                 print("\nRaktárkészlet:")
-                for alapanyag in sorted(rendszer.raktar.keys()):
+                for alapanyag in sorted(rendszer.raktar.keys()): #ábécérendbe szedve kilistázza a raktárban található összes alapanyagot és a hozzájuk tartozó aktuális mennyiséget.
                     print(alapanyag + ": " + str(rendszer.raktar[alapanyag]))
 
         # 4) Kilépés
@@ -118,8 +117,8 @@ def main():
                 if not alap:
                     print("Hibás név.")
                     break
-                menny = beolvas_float("Szükséges mennyiség #" + str(i) + " (pl. 0.2): ")
-                if menny is None or menny < 0:
+                menny = beolvas_egesz_szam("Szükséges mennyiség #" + str(i) + " (pl. 1): ")
+                if menny is None or menny < 1:
                     print("Hibás mennyiség.")
                     break
                 hozzavalok[alap] = menny
@@ -145,4 +144,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
