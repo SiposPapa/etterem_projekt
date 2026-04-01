@@ -186,7 +186,7 @@ class EtteremRendszer:
 
         return "Rendelés hozzáadva!"
 
-    def fizetes(self, asztal_szam, vasarlo_neve, kiszolgalo_neve):
+    def fizetes(self, asztal_szam, vasarlo_neve):
         """
         Lezárja az asztalt, összegzi a rendelést, és menti a vasarlasok.csv-be.
         A tételek darabszámmal szerepelnek (pl. 'Cola (5x)').
@@ -215,7 +215,7 @@ class EtteremRendszer:
         # Vásárlás rögzítése
         with open('vasarlasok.csv', 'a', encoding='utf-8', newline='') as f:
             iro = csv.writer(f, delimiter=';')
-            iro.writerow([vasarlo_neve, kiszolgalo_neve, osszeg, tetel_string])
+            iro.writerow([vasarlo_neve, osszeg, tetel_string])
 
         return "Fizetve: " + str(osszeg) + " Ft. Köszönjük!"
 
