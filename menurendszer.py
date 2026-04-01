@@ -4,12 +4,7 @@
 # - raktárkészlet (azonnali csökkentés rendeléskor)
 # - rendelés felvétel és fizetés
 # - vásárlások rögzítése CSV-be
-#
-# CSV-k (pontosvesszővel):
-# - menu.csv:    etel_nev;ar
-# - recept.csv:  etel_nev;alapanyag;mennyiseg
-# - raktar.csv:  alapanyag;mennyiseg
-# - vasarlasok.csv: vasarlo_nev;kiszolgalo_nev;osszeg;tetelek_szoveg (pl. "Pizza (2x), Cola (1x)")
+
 
 import csv
 from csv_definialas import Etel, Asztal
@@ -17,12 +12,6 @@ from csv_definialas import Etel, Asztal
 
 class EtteremRendszer:
     """
-    Egyszerű étterem-kezelő osztály.
-
-    Paraméter:
-    - asztalok_szama (int): hány asztalt hozzunk létre (1..N)
-
-    Mezők:
     - self.asztalok: Asztal objektumok listája (index: asztal_szam-1)
     - self.menu: név -> Etel
     - self.raktar: alapanyag -> mennyiség (float)
@@ -53,8 +42,6 @@ class EtteremRendszer:
                     alapanyag = sor[0]
                     menny = float(sor[1])
                     self.raktar[alapanyag] = menny
-        except FileNotFoundError:
-            # Ha nincs fájl, üres raktár marad (fapados)
             self.raktar = {}
 
         # Receptek ideiglenes gyűjtése: etel_nev -> {alapanyag: mennyiség}
@@ -84,7 +71,6 @@ class EtteremRendszer:
                     nev = sor[0]
                     ar = int(sor[1])
                     self.menu[nev] = Etel(nev, ar, receptek.get(nev, {}))
-        except FileNotFoundError:
             self.menu = {}
 ====
 
@@ -117,7 +103,6 @@ class EtteremRendszer:
         return 1 <= asztal_szam <= len(self.asztalok)
 
     def keres_etel_kulcs(self, etel_nev):
-        # Kis-nagybetűt nem vesszük szigorúan.
         for nev in self.menu:
             if nev.lower() == etel_nev.lower():
                 return nev
