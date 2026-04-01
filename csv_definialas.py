@@ -1,4 +1,4 @@
-# Egyszerű, fapados osztályok.
+
 # Etel: név, ár, recept (alapanyag -> mennyiség)
 # Asztal: rendelések listája, összegszámítás, lezárás.
 
