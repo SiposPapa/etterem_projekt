@@ -1,5 +1,4 @@
 # Parancssori menü a rendszerhez.
-# Fapados bevitelkezelés: ha nem számot kapunk, jelezzük és visszalépünk a menübe.
 # Opciók:
 # 1. Rendelés felvétele (azonnali raktárcsökkentéssel)
 # 2. Fizetés / asztal lezárása (és vásárlás mentése)
@@ -142,5 +141,5 @@ def main():
             print("Ismeretlen opció, próbálja újra.")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #ne fusson le feleslegesen akkor, ha egy másik fájlból csak importálni szeretnéd a benne lévő funkciókat
     main()
