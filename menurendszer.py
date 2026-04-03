@@ -45,9 +45,9 @@ class EtteremRendszer:
                     try:
                         menny = float(sor[1])
                         self.raktar[alapanyag] = menny
-                    except ValueError:
+                    except ValueError: #amikor egy függvény megfelelő típusú, de érvénytelen értékű adatot kap (például egy betűket tartalmazó szöveget próbálunk tizedes számmá alakítani, leállitja a programot
                         continue
-        except FileNotFoundError:
+        except FileNotFoundError: #ha a megadott útvonalon nem létezik fájl
             self.raktar = {}
 
         # Receptek ideiglenes gyűjtése: etel_nev -> {alapanyag: mennyiség}
