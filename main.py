@@ -1,28 +1,22 @@
-# Parancssori menü a rendszerhez.
-# Opciók:
-# 1. Rendelés felvétele (azonnali raktárcsökkentéssel)
-# 2. Fizetés / asztal lezárása (és vásárlás mentése)
-# 3. Raktárkészlet megtekintése
-# 4. Kilépés
-# 5. Új étel felvétele az étlapra (NÉV, ÁR, RECEPT)
-# 6. Étel törlése az étlapról
+#A program dokumentált funkciói végrehajtása
 
 from menurendszer import EtteremRendszer
 
 
 def beolvas_egesz_szam(szoveg):
     be = input(szoveg).strip()
-    if be.lstrip('-').isdigit():
+    if be.lstrip('-').isdigit(): #Az lstrip eltavolítja a megfelelő karaktert az elejeről
         return int(be)
     print("Érvénytelen bevitel: egész számot kell megadni.")
     return None
 
 
 def beolvas_float(szoveg):
-    # Float-beolvasás: csak pontot lehet tizedesnek.
+    # Float-beolvasás: csak pontot lehet tizedesnek, ezért replace
     be = input(szoveg).strip().replace(',', '.')
     # egész is lehet (pl. "2")
-    if be.replace('.', '', 1).lstrip('-').isdigit():
+    if be.replace('.', '', 1).lstrip('-').isdigit(): # replace szintaxis: replace(régi_érték, új_érték, darabszám)
+        
         try:
             return float(be)
         except:
@@ -141,5 +135,5 @@ def main():
             print("Ismeretlen opció, próbálja újra.")
 
 
-if __name__ == "__main__": #ne fusson le feleslegesen akkor, ha egy másik fájlból csak importálni szeretnéd a benne lévő funkciókat
+if __name__ == "__main__": #Ne fusson le feleslegesen akkor, ha egy másik fájlból csak importálni szeretnéd a benne lévő funkciókat
     main()
