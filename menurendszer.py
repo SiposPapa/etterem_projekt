@@ -1,9 +1,3 @@
-# Ez a fájl kezeli:
-# - CSV-k beolvasása/mentése
-# - étlap és receptek kezelése
-# - raktárkészlet (azonnali csökkentés rendeléskor)
-# - rendelés felvétel és fizetés
-# - vásárlások rögzítése CSV-be
 
 
 import csv
@@ -181,7 +175,7 @@ class EtteremRendszer:
         self.anyag_felhasznal(etel)
         self.asztalok[asztal_szam - 1].hozzaad(etel)
 
-        # Raktár azonnali mentése, hogy tartós legyen
+        # Raktár azonnali mentés
         self.ment_raktar()
 
         return "Rendelés hozzáadva!"
@@ -198,21 +192,21 @@ class EtteremRendszer:
         if not asztal.nyitva:
             return "Az asztalnál nincs aktív rendelés."
 
-        # Asztal lezárása: (összegzés tétele + lista)
+        # Asztal lezárása összegzés tételével
         osszeg, nevek = asztal.lezaras()
 
-        # Számlálás tétele: nevek darabjainak összeszámolása
+        # Megszámolás tétele: nevek darabjainak összeszámolása
         tetel_statisztika = {}
         for nev in nevek:
             tetel_statisztika[nev] = tetel_statisztika.get(nev, 0) + 1
 
-        # Formázott tétellista: "Pizza (2x), Cola (1x)"
+        # Lista formázása: "Pizza (2x), Cola (1x)"
         parok = []
         for nev in tetel_statisztika:
             parok.append(nev + " (" + str(tetel_statisztika[nev]) + "x)")
         tetel_string = ", ".join(parok)
 
-        # Vásárlás rögzítése
+        # Vásárlás kiírása
         with open('vasarlasok.csv', 'a', encoding='utf-8', newline='') as f:
             iro = csv.writer(f, delimiter=';')
             iro.writerow([vasarlo_neve, osszeg, tetel_string])
@@ -225,7 +219,7 @@ class EtteremRendszer:
         Új étel felvétele az étlapra.
         - nev: string
         - ar: int
-        - hozzavalok: dict (alapanyag -> mennyiség float)
+        - hozzavalok: dict
 
         Mentés: menu.csv + recept.csv frissül.
         """
